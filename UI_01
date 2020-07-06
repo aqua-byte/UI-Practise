@@ -1,0 +1,39 @@
+import maya.cmds as cmds
+import maya.mel as mel
+def ui():
+    if cmds.window('Win',exists=True):
+        cmds.deleteUI('Win')
+        
+    cmds.window('Win',title='Creating Objects',h=2000,w=4000)
+    cmds.showWindow('Win')
+    cmds.columnLayout('Lyt',adj=True)
+    cmds.text(l='Input The  Amount')
+    cmds.intField('intFCube')
+    cmds.button ('BtnCube',label='Cube', c='createCube()')
+    cmds.separator(h=8)
+    cmds.intField('intFSphere')
+    cmds.button('BtnSphere',label='Sphere',c='createSphere()')
+    cmds.separator(h=8)
+    cmds.intField('intFCylinder')
+    cmds.button('BtnCylinder',label='Cylinder',c='createCylinder()')
+    
+def createCube():
+    intFld_Cube=cmds.intField('intFCube',q=True,value=True)
+   
+    for i in range(intFld_Cube):
+        cmds.polyCube(h=5,w=5,n=('Cube_'+str(i)))
+    
+def createSphere():
+    intFld_Sphere=cmds.intField('intFSphere',q=True,value=True)
+    
+    for i in range (intFld_Sphere):
+        cmds.polySphere(r=5,n=('Sphere_'+str(i)))
+        
+def createCylinder():
+    intFld_Cylinder=cmds.intField('intFCylinder',q=True,value=True)
+    
+    for i in range(intFld_Cylinder):
+        cmds.polyCylinder(r=3,h=5,n=('Cylinder_'+str(i)))
+                
+    
+ui()
